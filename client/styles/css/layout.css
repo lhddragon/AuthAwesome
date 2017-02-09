@@ -1,0 +1,104 @@
+div[dock] {
+  border:solid 1px #BBB; 
+}
+.dock-top {
+  margin-bottom: 5px;
+}
+.dock-left {
+  margin-right: 5px;
+}
+.dock-right {
+  margin-left: 5px;
+}
+.dock-bottom {
+  margin-top: 5px;
+}
+
+.dock-bottom.ui-resizable {
+  border-top-width: 2px;
+  border-top-color: red;
+}
+.dock-top.ui-resizable {
+  border-bottom-width: 2px;
+  border-bottom-color: red;
+}
+.dock-left.ui-resizable {
+  border-right-width: 2px;
+  border-right-color: red;
+}
+.dock-right.ui-resizable {
+  border-left-width: 2px;
+  border-left-color: red;
+}
+
+#rightContainer{
+  width: 80%;
+  border:0px solid #BBB; 
+  margin-top:35px;
+  margin-right: 7px;
+  margin-bottom: 5px;
+}
+
+#leftContainer{
+  border:0px solid #BBB; 
+  margin-top:35px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+#layout_controlPanelTop{
+  height: 200px;
+  border-bottom:1px solid #BBB; 
+}
+
+
+#layout_networkInfo{
+  /*height: 80px;*/
+  border-bottom:1px solid #BBB; 
+}
+
+#layout_menu{
+  border:0px solid #BBB; 
+}
+
+#layout_qc{
+  height: 50%;
+  border-bottom:1px solid #BBB; 
+}
+
+
+#layout_feature{
+  border-bottom:1px solid #BBB; 
+}
+
+#layout_visulize{
+  height: 35%;
+  border:0px solid #BBB; 
+}
+
+#layout_table{
+  border:1px solid #BBB; 
+}
+
+#layout_chart{
+  width: 50%;
+  border:0px solid #BBB; 
+}
+
+#layout_map{
+  border:0px solid #BBB; 
+}
+
+
+#layout_stickmap{
+  height:30%;
+  border:1px solid #BBB; 
+}
+
+#layout_sld{
+  border:1px solid #BBB; 
+}
+
+/*#layout_menu{
+  border:1px solid #BBB; 
+}*/

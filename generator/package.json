@@ -1,0 +1,14 @@
+{
+  "name": "generator-",
+  "version": "0.1.0",
+  "description": "Angular.js + Foundation using Gulp for tasks and Hapi.js for the server",
+  "files": [
+    "client",
+    "server",
+    "tasks"
+  ],
+  "keywords": ["yeoman-generator", "angular", "gulp", "hapi", "foundation", "browsersync"],
+  "dependencies": {
+    "yeoman-generator": "^0.17.3"
+  }
+}

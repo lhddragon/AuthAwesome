@@ -1,0 +1,57 @@
+$navbarHeight: 2rem;
+$navbarFontSize: .875rem;
+$genericBlue: #245269;
+$genericBlueAlt: #355269;
+$fa-font-path: '/styles/fonts';
+@import 'bower_components/font-awesome/scss/font-awesome.scss';
+
+#ng-gulp-hapi {
+  min-width: rem-calc(768px);
+  max-width: rem-calc(1280px);
+  margin: 0 auto;
+
+
+  div {
+    box-sizing: border-box;
+  }
+
+  i {
+    font-style: normal;
+  }
+
+  /**
+   * App-wide Styles
+   */
+
+  #navbarView {
+    margin-bottom: rem-calc(10px);
+    padding: 0;
+    background-color: white;
+    height: $navbarHeight;
+  }
+
+  #contentView {
+    padding: 0;
+    margin: 0;
+    max-width: initial;
+    position: relative;
+  }
+
+  // inject:bower
+
+
+  @import 'bower_components/foundation/scss/foundation.scss';
+
+
+  // end:bower
+
+  // inject:scss
+
+  @import 'components/navbar/_navbar.scss';
+
+  @import 'views/main/_main.scss';
+
+  @import 'views/main/modal/_modal.scss';
+
+  // end:scss
+}

@@ -1,0 +1,310 @@
+﻿/*.listViewActionTD {
+    text-align: left; 
+    padding-left: 0; 
+    padding-right: 0;
+    padding-top: 6px;
+}*/
+
+.listViewActionGroupDiv {
+    padding-left: 5px;
+    padding-top: 10px;
+}
+
+.listViewSearchDiv {
+    padding-top: 4px;
+    padding-left: 0;
+}
+
+.listViewPaginationDiv {
+    padding-top: 4px;
+    padding-right: 5px;
+}
+
+.listViewPagination {
+    padding-top: 5px;
+    text-align: right;
+    padding-right: 0;
+}
+
+.listViewBanner {
+    border: 1px solid #cccccc;
+    /*box-shadow: 0 0 6px #ccc;*/
+    background-color: #f5f5f5;
+    height: 42px;
+}
+
+
+.tableFirstBoderLeft {
+    border-left: 1px solid #e3e3e3;
+}
+
+.tableLastBoderRight {
+    width: 40px;
+    border-right: 1px solid #e3e3e3;
+    text-align: right;
+}
+
+.tableRow {
+    border-bottom: 1px solid #e3e3e3;
+    background-color: #FFFFFF;
+}
+
+
+
+/**
+ * Map Examples Specific
+ */
+.smallmap {
+    width: 100%;
+    height: 100%;
+}
+
+
+.userListAddButtonItem:hover .userListAddButton {
+    display: block;
+}
+
+.userListAddButton {
+    display: none;
+}
+
+
+.btn-LBA {
+    height: 30px;
+    font-size: 15px;
+    background-color: #875d15;
+    border-color: #cccccc;
+    width: 100px;
+    padding-top: 3px;
+    color: white;
+}
+
+
+.mapOverlay {
+    width: 25%;
+    height: 80%;
+    position: absolute;
+    top: 13%;
+    left: 38%;
+    z-index: 999999;
+    background-color: rgba(161, 161, 161, 0.5);
+    /*opacity:0.5;*/
+    border: 4px solid green;
+    pointer-events: none;
+}
+
+
+
+.icon-lbe {
+    background-image: url("/Content/images/ModuleIcon/LBA-Sym-Circle_2-16-N.png");
+    background-position: center center;
+    height: 14px;
+    width: 14px;
+}
+
+
+/* draggable div Styles go here */
+
+.as-sortable-item,
+.as-sortable-placeholder {
+    width: 170px;
+    margin: 2px;
+    border: 0px solid #ff0000;
+    border-radius: 5px;
+    list-style: none;
+}
+
+.as-sortable-placeholder {
+    border: 1px dotted #0000ff !important;
+}
+
+#sortable-container {
+    display: inline-block;
+}
+
+.column {
+    border: 1px solid #000000;
+    border-radius: 5px;
+}
+
+
+.gridStyle {
+    border: 0px solid rgb(212,212,212);
+    width: 100%;
+    height: 300px;
+}
+
+
+
+/*required css when Initializing layout*/
+/*
+	 *	NOTE: All CSS is purely cosmetic - it does not affect functionality
+	 */
+
+/* customize borders to avoid double-borders around inner-layouts */
+.ui-layout-pane {
+    border: 0; /* override layout-default-latest.css */
+    border-top: 0px solid #BBB;
+    border-bottom: 1px solid #BBB;
+}
+
+.ui-layout-pane-north,
+.ui-layout-pane-south {
+    border: 0px solid #BBB;
+    overflow: hidden;
+}
+
+.ui-layout-pane-west,
+.ui-layout-pane-east {
+}
+
+.ui-layout-pane-center {
+    border-left: 0;
+    border-right: 0;
+}
+
+/*avoid margin*/
+.ui-layout-north,
+.ui-layout-south,
+/*.inner-west,*/
+.inner-center,
+.inner2-center,
+.inner3-center,
+.inner4-south,
+.inner4-center {
+    border: 0; /* cosmetic */
+    padding: 0;
+    overflow: hidden;
+}
+
+.inner3-center {
+    border: 0px solid #bfbfbf;
+}
+
+.ui-layout-north {
+    border: 1px solid #bfbfbf;
+}
+
+.inner2-center {
+    border: 0px solid #bfbfbf;
+}
+
+.inner-west {
+    border: 1px solid #bfbfbf;
+}
+
+.inner4-center {
+    border: 0px solid #bfbfbf;
+}
+
+.inner4-south {
+    border: 1px solid #bfbfbf;
+}
+
+.outer-east {
+    border: 1px solid #bfbfbf;
+}
+
+
+
+/* add shading to outer sidebar-panes */
+.outer-west,
+.outer-east {
+    /*background-color: #EEE;*/
+}
+
+.inner3-west,
+.inner3-east {
+    /*background-color: #EEE;*/
+}
+
+.middle-west,
+.middle-east {
+    background-color: #F8F8F8;
+}
+
+/* remove padding & scrolling from panes that are 'containers' for nested layouts */
+.outer-center,
+.middle-center {
+    border: 0; /* cosmetic */
+    padding: 0;
+    overflow: hidden;
+}
+
+/*
+	 *	customize borders on panes/resizers to make pretty
+	 */
+.ui-layout-pane-west {
+    border-right: 0;
+}
+
+.ui-layout-resizer-west {
+    border-left: 1px solid #BBB;
+}
+
+.ui-layout-pane-east {
+    border-left: 0;
+    border: 1px solid #bfbfbf;
+}
+
+.ui-layout-resizer-east {
+    border-right: 0px solid #BBB;
+}
+
+.ui-layout-pane-north {
+    border-bottom: 0;
+    border: 1px solid #bfbfbf;
+}
+
+.ui-layout-resizer-north {
+    border-top: 0px solid #BBB;
+}
+
+.ui-layout-pane-south {
+    border-top: 0;
+    border: 1px solid #bfbfbf;
+}
+
+.ui-layout-resizer-south {
+    border-bottom: 0px solid #BBB;
+}
+/*
+	 *	add borders to resizers when pane is 'closed'
+	 *
+	 *.ui-layout-resizer-closed	{ border:			1px solid #BBB; }
+	 */
+/*
+	 *	show both borders when the resizer is 'dragging'
+	 */
+.ui-layout-resizer-west-dragging,
+.ui-layout-resizer-east-dragging {
+    border-left: 1px solid #BBB;
+    border-right: 1px solid #BBB;
+}
+
+.ui-layout-resizer-north-dragging,
+.ui-layout-resizer-south-dragging {
+    border-top: 1px solid #BBB;
+    border-bottom: 1px solid #BBB;
+}
+
+/*userd for make gap when add layer*/
+.layerGap {
+  margin-right: 0px;
+  margin-left: 0px;
+  height: 26px;
+}
+
+.arrow-up {
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    
+    border-bottom: 5px solid black;
+}
+
+.glyphicon {
+    top: 2px;
+}
+

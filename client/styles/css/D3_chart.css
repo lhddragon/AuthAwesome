@@ -1,0 +1,87 @@
+svg {
+    font: 10px sans-serif;
+    shape-rendering: crispEdges;
+}
+
+/*rect { fill: #ddd; } */
+path.dot {
+    fill: rgba(255, 255, 255, 0);
+    /*stroke-width: 2px; */
+}
+
+.AADT {
+    stroke: white;
+    stroke-width: 1px;
+    stroke-linecap: square;
+}
+
+.CULVERTS {
+}
+
+.SpeedLimits {
+    stroke: white;
+    stroke-width: 1px;
+}
+
+.RouteLable {
+    font-family: sans-serif;
+    font-size: 12px;
+    fill: red;
+}
+
+.SpeedLimits_SPEED_LIMIT_LABEL {
+    font-family: sans-serif;
+    font-size: 15px;
+    fill: white;
+}
+
+.AADT_AADT_LABEL {
+    font-family: sans-serif;
+    font-size: 15px;
+    fill: white;
+    text-anchor: middle
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #fff;
+}
+
+.axis2 path,
+.axis2 line {
+    fill: none;
+    stroke: #fff;
+}
+
+.popup {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    width: 200px;
+    border: 1px #ccc solid;
+    border-radius: 6px;
+    box-shadow: #333 2px 2px 4px;
+    padding: 8px;
+    font-family: arial, helvetica, sans-serif;
+}
+
+.popup h2 {
+    margin: 0 0 1rem 0;
+}
+
+div.tooltip {
+    /* set the CSS for tooltip divs */
+    position: absolute; /* reference for measurement */
+    text-align: center; /* align the text to the center */
+    width: 100px; /* set the width of the rectangle */
+    height: 58px; /* set the height of the rectangle */
+    padding: 2px; /* set a border around the rectangle */
+    font: 12px sans-serif; /* set the font type for the tooltips */
+    background: white; /* set the colour of the rectangle */
+    border: 0px; /* turn off the border (0px) */
+    border-radius: 8px; /* set how rounded the edges of the rectangle is */
+    pointer-events: none;
+    /* 'none' tells the mouse to ignore the rectangle */
+}

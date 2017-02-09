@@ -1,0 +1,6 @@
+#
+# svn propset svn:ignore -F .svnignore .
+#
+
+bower_components
+index.html
