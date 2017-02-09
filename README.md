@@ -4,6 +4,6 @@ The goal of this project is to build a authentication module and by just doing s
 
 ## Key features
 
-- configurable login page template
-- login/logout/register/3rd party login
-- JWT integrated
+- [ ] configurable login page template
+- [ ] login/logout/register/3rd party login
+- [ ] JWT integrated
