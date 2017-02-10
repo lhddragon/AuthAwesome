@@ -7,6 +7,7 @@
 
 var Hapi = require('hapi');
 var _ = require('lodash');
+const Boom = require('boom');
 var modules = require('./modules');
 var chalk = require('chalk');
 var config = require('./config/environment');
@@ -16,16 +17,15 @@ var swig = require('swig');
 swig.setDefaults({varControls: ['%{', '}%']});
 
 // Instantiate the server
-var server = new Hapi.Server();
+var server = new Hapi.Server({ debug: { request: ['error'] } });
 
 server.connection({port: config.port});
 /**
  * The hapijs plugins that we want to use and their configs
  */
  var plugins = [
-//   {
-//     plugin: require('lout')
-//   }
+    require('hapi-auth-cookie'), 
+    require('bell')
  ];
 
 
@@ -38,6 +38,33 @@ server.register(plugins, function(err) {
   if(err) {
     throw err;
   }
+
+  // Declare an authentication strategy using the bell scheme
+    // with the name of the provider, cookie encryption password,
+    // and the OAuth client credentials.
+  server.auth.strategy('twitter', 'bell', {
+        provider: 'twitter',
+        password: 'cookie_encryption_password_secure',
+        clientId: 'zlHDmxbFYgPQXWu5mYuysTCDU',
+        clientSecret: 'TuEpuW5apYR8JlQap1aZlc7GTfwwQXdegFGA8hn6mBHh4NBUwC',
+        isSecure: false     // Terrible idea but required if not using HTTPS especially if developing locally
+    });
+
+  server.auth.strategy('base', 'cookie', {
+    password: 'supersecretpassword', // cookie secret
+    cookie: 'app-cookie', // Cookie name,
+    // redirectTo: '/auth/twitter',
+    ttl: 24 * 60 * 60 * 1000 // Set session to 1 day
+  });
+
+  //Setup the session strategy
+  // server.auth.strategy('session', 'cookie', {
+  //   password: 'secret_cookie_encryption_password', //Use something more secure in production
+  //   // redirectTo: '/login', //If there is no session, redirect here
+  //   isSecure: false //Should be set to true (which is the default) in production
+  // });
+
+
 
   /**
    * Make sure if this script is being required as a module by another script, we don't start the server.
@@ -82,13 +109,25 @@ server.register(plugins, function(err) {
     server.route({
       method: 'GET',
       path: '/{param*}',
-      handler:  {
-        directory: {
-          path: config.appRoot,
-          listing: true,
-          index: ['index.html']
+      config: {
+        // auth: 'session', //<-- require a session for this, so we have access to the twitter profile
+        // handler: function(request, reply) {
+
+        //   //Return a message using the information from the session
+        //   return reply(request.auth.credentials.displayName);
+        // }
+        auth: {
+          strategy: 'base'
+        },
+        handler:  {
+          directory: {
+            path: config.appRoot,
+            listing: true,
+            index: ['index.html']
+          }
         }
       }
+      
     });
 
   }

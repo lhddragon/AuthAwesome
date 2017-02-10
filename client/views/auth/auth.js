@@ -13,5 +13,8 @@ angular.module('ng-gulp-hapi')
             resolve: appResolverProvider.auth
           }
         }
+      })
+      .state('auth.twitter', {
+          url: '/auth/twitter'
       });
   });

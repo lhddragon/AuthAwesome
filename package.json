@@ -39,9 +39,13 @@
   },
   "dependencies": {
     "async": "^0.9.0",
+    "bell": "^8.5.0",
     "body-parser": "^1.12.0",
+    "boom": "^4.2.0",
     "gulp-less": "^3.0.3",
     "hapi": "8.8.1",
+    "inert": "^4.1.0",
+    "hapi-auth-cookie": "^6.1.1",
     "lodash": "^3.8.0",
     "swig": "^1.4.2"
   },

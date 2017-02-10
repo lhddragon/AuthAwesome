@@ -47,7 +47,8 @@ angular.module('ng-gulp-hapi', [
       authProviderPaths: {
         github:   '/auth/github',
         facebook: '/auth/facebook',
-        google:   '/auth/google'
+        google:   '/auth/google',
+        twitter:   '/auth/twitter'
       },
       tokenFormat: {
         'access-token': '{{ token }}',
