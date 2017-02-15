@@ -1,12 +1,29 @@
 'use strict';
 
 angular.module('ng-gulp-hapi')
-	.controller('LoginCtrl', ['$scope', '$state', '$auth', function($scope, $state, $auth) {
+	.controller('LoginCtrl', ['$scope', '$state', '$auth', '$http', function($scope, $state, $auth, $http) {
 
-		this.login = function() {
-			// $state.go('auth.twitter');
+		$scope.email = 'asdf@fsdf.com';
+		$scope.password = 'asdfa';
+
+		function authSuccessful(res) {
+			console.log(res.token);
 			$state.go('main');
-		};
+		}
+
+		this.login = function (email, password) {
+			return $http.post('http://localhost:3000/' + 'login', {
+				user: {
+					email: email,
+					password: password
+				}
+			}).success(authSuccessful);
+		}
+
+		// this.login = function() {
+		// 	// $state.go('auth.twitter');
+		// 	$state.go('main');
+		// };
 
 		this.twitterLogin = function() {
 			$auth.authenticate('twitter')

@@ -14,7 +14,8 @@ angular.module('ng-gulp-hapi', [
   'ui.sortable',
   'ngPopup',
   'ngDock',
-  'ng-token-auth'
+  'ng-token-auth',
+  'angular-jwt'
 ])
   .config(function ($urlRouterProvider, $httpProvider, $animateProvider, $authProvider) {
     $urlRouterProvider.otherwise('/login');
