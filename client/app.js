@@ -22,69 +22,79 @@ angular.module('ng-gulp-hapi', [
 
     $httpProvider.interceptors.push('httpInterceptor');
 
-    $httpProvider.defaults.headers.post  = {'Content-Type': 'application/x-www-form-urlencoded'};
+    $httpProvider.defaults.headers.post  = {'Content-Type': 'application/json; charset=utf-8'};
 
     $animateProvider.classNameFilter(/anim-/);
 
     //$httpProvider.interceptors.push('httpInterceptor');
-    $authProvider.configure({
-      apiUrl:                  '/api',
-      tokenValidationPath:     '/auth/validate_token',
-      signOutUrl:              '/auth/sign_out',
-      emailRegistrationPath:   '/auth',
-      accountUpdatePath:       '/auth',
-      accountDeletePath:       '/auth',
-      confirmationSuccessUrl:  window.location.href,
-      passwordResetPath:       '/auth/password',
-      passwordUpdatePath:      '/auth/password',
-      passwordResetSuccessUrl: window.location.href,
-      emailSignInPath:         '/auth/sign_in',
-      storage:                 'cookies',
-      forceValidateToken:      false,
-      validateOnPageLoad:      true,
-      proxyIf:                 function() { return false; },
-      proxyUrl:                '/proxy',
-      omniauthWindowType:      'sameWindow',
-      authProviderPaths: {
-        github:   '/auth/github',
-        facebook: '/auth/facebook',
-        google:   '/auth/google',
-        twitter:   '/auth/twitter'
-      },
-      tokenFormat: {
-        'access-token': '{{ token }}',
-        'token-type':   'Bearer',
-        'client':       '{{ clientId }}',
-        'expiry':       '{{ expiry }}',
-        'uid':          '{{ uid }}'
-      },
-      cookieOps: {
-        path: '/',
-        expires: 9999,
-        expirationUnit: 'days',
-        secure: false,
-        domain: 'domain.com'
-      },
-      createPopup: function(url) {
-        return window.open(url, '_blank', 'closebuttoncaption=Cancel');
-      },
-      parseExpiry: function(headers) {
-        // convert from UTC ruby (seconds) to UTC js (milliseconds)
-        return (parseInt(headers['expiry']) * 1000) || null;
-      },
-      handleLoginResponse: function(response) {
-        return response.data;
-      },
-      handleAccountUpdateResponse: function(response) {
-        return response.data;
-      },
-      handleTokenValidationResponse: function(response) {
-        return response.data;
-      }
-    });
+    // $authProvider.configure({
+    //   apiUrl:                  '/api',
+    //   tokenValidationPath:     '/auth/validate_token',
+    //   signOutUrl:              '/auth/sign_out',
+    //   emailRegistrationPath:   '/auth',
+    //   accountUpdatePath:       '/auth',
+    //   accountDeletePath:       '/auth',
+    //   confirmationSuccessUrl:  window.location.href,
+    //   passwordResetPath:       '/auth/password',
+    //   passwordUpdatePath:      '/auth/password',
+    //   passwordResetSuccessUrl: window.location.href,
+    //   emailSignInPath:         '/auth/sign_in',
+    //   storage:                 'cookies',
+    //   forceValidateToken:      false,
+    //   validateOnPageLoad:      true,
+    //   proxyIf:                 function() { return false; },
+    //   proxyUrl:                '/proxy',
+    //   omniauthWindowType:      'sameWindow',
+    //   authProviderPaths: {
+    //     github:   '/auth/github',
+    //     facebook: '/auth/facebook',
+    //     google:   '/auth/google',
+    //     twitter:   '/auth/twitter'
+    //   },
+    //   tokenFormat: {
+    //     'access-token': '{{ token }}',
+    //     'token-type':   'Bearer',
+    //     'client':       '{{ clientId }}',
+    //     'expiry':       '{{ expiry }}',
+    //     'uid':          '{{ uid }}'
+    //   },
+    //   cookieOps: {
+    //     path: '/',
+    //     expires: 9999,
+    //     expirationUnit: 'days',
+    //     secure: false,
+    //     domain: 'domain.com'
+    //   },
+    //   createPopup: function(url) {
+    //     return window.open(url, '_blank', 'closebuttoncaption=Cancel');
+    //   },
+    //   parseExpiry: function(headers) {
+    //     // convert from UTC ruby (seconds) to UTC js (milliseconds)
+    //     return (parseInt(headers['expiry']) * 1000) || null;
+    //   },
+    //   handleLoginResponse: function(response) {
+    //     return response.data;
+    //   },
+    //   handleAccountUpdateResponse: function(response) {
+    //     return response.data;
+    //   },
+    //   handleTokenValidationResponse: function(response) {
+    //     return response.data;
+    //   }
+    // });
 
   })
-  .run(function (_, $rootScope, $state, gettextCatalog, $log) {
+  .constant('API_URL', 'http://localhost:3000/')
+  .run(function (_, $rootScope, $state, gettextCatalog, $log, $window) {
+    var params = $window.location.search.substring(1);
+
+    if (params && $window.opener && $window.opener.location.origin === $window.location.origin) {
+      var pair = params.split('=');
+      var code = decodeURIComponent(pair[1]);
+
+      $window.opener.postMessage(code, $window.location.origin);
+    }
+
     toastr.options = {
         'closeButton': true,
         'debug': false,
@@ -142,36 +152,4 @@ angular.module('ng-gulp-hapi', [
   });
 
 
-//TODO: move to separate i18n file
-angular.module('ng-gulp-hapi').config(function (i18nServiceProvider){
-  var urlRoot = '/api/export/locale/';
-  var English = 'en';
-  var Chinese = 'zh';
-  var endPoint = '.json?key=61046619b5620f332317a7e8492dae3d&index=name';
-
-  $.ajax({
-    method: 'GET',
-    url: urlRoot + English + endPoint,
-    context: this
-  }).then(function(enresult) {
-    var eni18n = JSON.parse(enresult);
-    console.log(eni18n);
-    $.ajax({
-      method: 'GET',
-      url: urlRoot + Chinese + endPoint,
-      context: this
-    }).then(function(zhresult) {
-      var zhi18n = JSON.parse(zhresult);
-
-      i18nServiceProvider.api.set('en-us');
-      i18nServiceProvider.api.add(['en', 'en-us'],{
-        labelText: eni18n
-      });
-      i18nServiceProvider.api.add('zh-cn',{
-        labelText: zhi18n
-      });
-
-    });    
-  });
-});
 

@@ -58,11 +58,10 @@
             <input name="email" ng-model="email" type="email" class="form-control" placeholder="Email address" required>
             <p class="help-block" ng-show="register.email.$dirty && register.email.$invalid">Please enter a proper email.</p>
             <input name="password" ng-model="password" type="password" class="form-control" placeholder="Password" required>
-            <button ng-disabled="register.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="auth.login(email, password)">Login</button>
+            <button ng-disabled="register.$invalid" class="btn btn-lg btn-primary btn-block" ng-click="auth.login()">Login</button>
             <br />
             <a class="text-muted pull-right" ui-sref="register">Create account</a>
-            <button ng-click="authenticate('google')" class="btn btn-lg btn-default btn-block" type="button">Google</button>
-            <button ng-click="authenticate('facebook')" class="btn btn-lg btn-default btn-block" type="button">Facebook</button>
+            <button ng-click="auth.authenticate('google')" class="btn btn-lg btn-default btn-block" type="button">Google</button>
         </form>
     </div>
     <div class="col-sm-5">

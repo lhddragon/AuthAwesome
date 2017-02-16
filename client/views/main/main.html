@@ -1,5 +1,5 @@
 
-<div id="navbar" class="small-12" ui-view="navbar"></div>
+<div id="navbar" class="small-12" ui-view="navbar">{{user}}</div>
 <div dock-ref="">
     <div id="2 left" style="border:none" dock="'fill'" dock-ref="">
         <div id="rightContainer" dock-resizable dock="'right'" dock-ref="">
@@ -19,7 +19,7 @@
         </div>
         <div id="leftContainer" dock-resizable dock="'fill'" dock-ref="">
             <div id="layout_controlPanelTop" dock="'top'">
-            	
+            	<label ng-click="test()">test</label>
 
             </div>
             <div id="layout_networkInfo" ui-view="feature-panel" dock="'fill'"></div>

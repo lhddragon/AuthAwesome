@@ -21,7 +21,7 @@ angular.module('ng-gulp-hapi')
             templateUrl: 'components/mapPanel/mapPanel.html',
             controller: 'MapPanelCtrl',
             controllerAs: 'mapPanel'
-          },
+          }
         }
       });
   });
