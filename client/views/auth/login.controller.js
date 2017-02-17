@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ng-gulp-hapi')
-	.controller('LoginCtrl', ['$scope', 'auth', '$auth', function($scope, auth, $auth) {
+	.controller('LoginCtrl', ['$scope', '$state', '$auth', 'authToken', function($scope, $state, $auth, authToken) {
 
 		$scope.email = 'test@test.com';
 		$scope.password = '1234';
@@ -26,15 +26,24 @@ angular.module('ng-gulp-hapi')
 			console.log(err.data.message);
 		}
 
+		function handleSuccess(res) {
+			console.log(res);
+			$auth.setToken(res.data.token);
+			$state.go('main');
+		}
+
 		this.login = function () {
-			auth.login($scope.email, $scope.password).then(function (res) {
-				console.log(res);
+			$auth.login({
+				email: $scope.email,
+				password: $scope.password
+			}).then(function (res) {
+				handleSuccess(res);
 			}).catch(handleError);
 		};
 
 		this.authenticate = function (provider) {
-			auth.googleAuth().then(function (res) {
-				console.log(res);
+			$auth.authenticate(provider).then(function (res) {
+				handleSuccess(res);
 			}, handleError);
 		};
 

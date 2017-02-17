@@ -34,14 +34,14 @@ div[dock] {
 #rightContainer{
   width: 80%;
   border:0px solid #BBB; 
-  margin-top:35px;
+  margin-top:5px;
   margin-right: 7px;
   margin-bottom: 5px;
 }
 
 #leftContainer{
   border:0px solid #BBB; 
-  margin-top:35px;
+  margin-top:5px;
   margin-left: 5px;
   margin-bottom: 5px;
 }

@@ -1,28 +1,13 @@
+  <div class="row">
+    <div class="col-md-1">
+Hello {{user}}
 
-<div id="navbar" class="small-12" ui-view="navbar">{{user}}</div>
-<div dock-ref="">
-    <div id="2 left" style="border:none" dock="'fill'" dock-ref="">
-        <div id="rightContainer" dock-resizable dock="'right'" dock-ref="">
-            <div id="layout_visulize" dock-resizable dock="'top'" dock-ref="">
-                <div id="layout_chart" dock-resizable dock="'left'" dock-ref="">
-                    <div id="layout_sld" dock="'fill'">
+</div>
 
-                    </div>
-                </div>
-                <div id="layout_map" dock-resizable dock="'fill'" dock-ref="">
-                	<div id="layout_chartPanel" dock="'fill'" ui-view="map-panel"></div>
-                </div>
-            </div>
-            <div id="layout_table" dock="'fill'">
-                <div ui-view="table-panel"></div>
-            </div>
-        </div>
-        <div id="leftContainer" dock-resizable dock="'fill'" dock-ref="">
-            <div id="layout_controlPanelTop" dock="'top'">
-            	<label ng-click="test()">test</label>
-
-            </div>
-            <div id="layout_networkInfo" ui-view="feature-panel" dock="'fill'"></div>
-        </div>
-    </div>
+    <div class="col-md-9">
+</div>
+<div class="col-md-2">
+<a class="btn btn-default" ng-click="test()" role="button">test</a>
+<a class="btn btn-default" ng-click="logout()" role="button">Logout</a>
+</div>
 </div>

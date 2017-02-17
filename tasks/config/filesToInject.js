@@ -31,7 +31,7 @@ module.exports = [
   'client/styles/css/ol.css',
   'client/styles/css/ol3-layerswitcher.css',
   'client/styles/css/toastr.css',
-  'client/styles/css/login.css',
+  // 'client/styles/css/login.css',
   // 'client/styles/css/app.css',
   // 'client/styles/css/Bootstrap_GISTIC.css'
 ];

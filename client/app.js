@@ -14,10 +14,11 @@ angular.module('ng-gulp-hapi', [
   'ui.sortable',
   'ngPopup',
   'ngDock',
-  'ng-token-auth',
-  'angular-jwt'
+  // 'ng-token-auth',
+  'angular-jwt',
+  'satellizer'
 ])
-  .config(function ($urlRouterProvider, $httpProvider, $animateProvider, $authProvider) {
+  .config(function ($urlRouterProvider, $httpProvider, $animateProvider, $authProvider, API_URL) {
     $urlRouterProvider.otherwise('/login');
 
     $httpProvider.interceptors.push('httpInterceptor');
@@ -25,6 +26,22 @@ angular.module('ng-gulp-hapi', [
     $httpProvider.defaults.headers.post  = {'Content-Type': 'application/json; charset=utf-8'};
 
     $animateProvider.classNameFilter(/anim-/);
+
+    $authProvider.loginUrl = API_URL + 'auth/login';
+    $authProvider.signupUrl = API_URL + 'auth/register';
+
+    $authProvider.google({
+      clientId: '476692673943-stuidcbr8i88aog942rn3dm6ui9604i2.apps.googleusercontent.com',
+      url: API_URL + 'auth/google'
+    });
+
+    $authProvider.facebook({
+      clientId: '698580886903269',
+      url: API_URL + 'auth/facebook'
+    });
+
+    
+
 
     //$httpProvider.interceptors.push('httpInterceptor');
     // $authProvider.configure({

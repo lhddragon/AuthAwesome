@@ -12,15 +12,10 @@ angular.module('ng-gulp-hapi')
             controllerAs: 'main',
             resolve: appResolverProvider.main
           },
-          'navbar': {
+          'navbar@main': {
             templateUrl: 'components/navbar/navbar.html',
             controller: 'NavbarCtrl',
             resolve: appResolverProvider.navbar
-          },
-          'map-panel@lbe': {
-            templateUrl: 'components/mapPanel/mapPanel.html',
-            controller: 'MapPanelCtrl',
-            controllerAs: 'mapPanel'
           }
         }
       });

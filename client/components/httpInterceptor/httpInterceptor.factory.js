@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('ng-gulp-hapi')
-  .factory('httpInterceptor', ['authToken', function (authToken) {
+  .factory('httpInterceptor', ['$injector', function ($injector) {
     return {
 
       request: function(config) {
-            var token = authToken.getToken();
+            var $auth = $injector.get('$auth');
+            var token = $auth.getToken();
 
-            if (token)
+            if (token) {
                 config.headers.Authorization = 'Bearer ' + token;
-
+            }
+               
             return config;
         },
         response: function(response) {
