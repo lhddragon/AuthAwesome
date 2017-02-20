@@ -40,6 +40,19 @@ angular.module('ng-gulp-hapi')
           }
         }
       })
+      .state('register', {
+        url: '/register',
+        views: {
+          '': {
+            templateUrl: 'views/auth/register.html',
+            controller: 'RegisterCtrl',
+            controllerAs: 'register',
+            resolve: {
+              // skipIfLoggedIn: skipIfLoggedIn
+            }
+          }
+        }
+      })
       .state('auth.twitter', {
           url: '/auth/twitter'
       });

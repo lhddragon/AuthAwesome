@@ -14,7 +14,6 @@ angular.module('ng-gulp-hapi', [
   'ui.sortable',
   'ngPopup',
   'ngDock',
-  // 'ng-token-auth',
   'angular-jwt',
   'satellizer'
 ])
@@ -40,7 +39,7 @@ angular.module('ng-gulp-hapi', [
       url: API_URL + 'auth/facebook'
     });
 
-    
+
 
 
     //$httpProvider.interceptors.push('httpInterceptor');
@@ -112,22 +111,6 @@ angular.module('ng-gulp-hapi', [
       $window.opener.postMessage(code, $window.location.origin);
     }
 
-    toastr.options = {
-        'closeButton': true,
-        'debug': false,
-        'progressBar': true,
-        'positionClass': 'toast-bottom-right',
-        'preventDuplicates': true,
-        'onclick': null,
-        'showDuration': '0',
-        'hideDuration': '0',
-        'timeOut': '5000',
-        'extendedTimeOut': '0',
-        'showEasing': 'swing',
-        'hideEasing': 'linear',
-        'showMethod': 'fadeIn',
-        'hideMethod': 'fadeOut'
-    };
     $rootScope.$state = $state;
     $rootScope.loading = true;
     $rootScope.mode = 'SLD';
