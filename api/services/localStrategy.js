@@ -36,26 +36,20 @@ exports.register = new LocalStrategy(strategyOptions, function (email, password,
 		email: email
 	};
 
-	// User.findOne(searchUser, function (err, user) {
-	// 	if (err) return done(err);
+	User.findOne(searchUser, function (err, user) {
+		if (err) return done(err);
 
-	// 	if (user) return done(null, false, {
-	// 		message: 'email already exists'
-	// 	});
+		if (user) return done(null, false, {
+			message: 'email already exists'
+		});
 
-	// 	var newUser = new User({
-	// 		email: email,
-	// 		password: password
-	// 	});
-
-	// 	newUser.save(function (err) {
-	// 		done(null, newUser);
-	// 	})
-	// });
-
-	var newUser = new User({
+		var newUser = new User({
 			email: email,
 			password: password
 		});
-	done(null, newUser);
+
+		newUser.save(function (err) {
+			done(null, newUser);
+		})
+	});
 });
