@@ -7,10 +7,11 @@ var smtpTransport = require('nodemailer-smtp-transport');
 var config = require('./config.js');
 var User = require('../models/User.js');
 
+var verifyEmailRoot = 'http://localhost:3000/auth/verifyEmail?token=';
 
 var model = {
-	verifyUrl: 'http://localhost:3000/auth/verifyEmail?token=',
-	title: 'psJwt',
+	verifyUrl: '',
+	title: 'AuthAwesome',
 	subTitle: 'Thanks for signing up!',
 	body: 'Please verify your email address by clicking the button below'
 }
@@ -23,18 +24,18 @@ exports.send = function (email) {
 	var token = jwt.encode(payload, config.EMAIL_SECRET);
 
 	var transporter = nodemailer.createTransport(smtpTransport({
-		host: 'smtpout.secureserver.net',
+		host: 'smtp.gmail.com',
 		secure: true,
 		auth: {
-			user: 'alex@socialplay.com',
+			user: 'info@gisticinc.com',
 			pass: config.SMTP_PASS
 		}
 	}));
 
 	var mailOptions = {
-		from: 'Accounts <accounts@socialplay.com>',
+		from: 'Accounts <info@gisticinc.com>',
 		to: email,
-		subject: 'psJwt Account Verification',
+		subject: 'AuthAwesome Account Verification',
 		html: getHtml(token)
 	};
 
@@ -46,6 +47,7 @@ exports.send = function (email) {
 }
 
 exports.handler = function (req, res) {
+	console.log(req.query.token);
 	var token = req.query.token;
 
 	var payload = jwt.decode(token, config.EMAIL_SECRET);
@@ -54,22 +56,23 @@ exports.handler = function (req, res) {
 
 	if (!email) return handleError(res);
 
-	User.findOne({
-		email: email
-	}, function (err, foundUser) {
-		if (err) return res.status(500);
+	return res.redirect(config.APP_URL);
+	// User.findOne({
+	// 	email: email
+	// }, function (err, foundUser) {
+	// 	if (err) return res.status(500);
 
-		if (!foundUser) return handleError(res);
+	// 	if (!foundUser) return handleError(res);
 
-		if (!foundUser.active)
-			foundUser.active = true;
+	// 	if (!foundUser.active)
+	// 		foundUser.active = true;
 
-		foundUser.save(function (err) {
-			if (err) return res.status(500);
+	// 	foundUser.save(function (err) {
+	// 		if (err) return res.status(500);
 
-			return res.redirect(config.APP_URL);
-		})
-	})
+	// 		return res.redirect(config.APP_URL);
+	// 	})
+	// })
 }
 
 function getHtml(token) {
@@ -78,7 +81,7 @@ function getHtml(token) {
 
 	var template = _.template(html);
 
-	model.verifyUrl += token;
+	model.verifyUrl = verifyEmailRoot + token;
 
 	return template(model);
 }
