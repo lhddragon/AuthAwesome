@@ -178,6 +178,71 @@
         return Config;
     }());
     ;
+                     
+    var defaultAuthState = [
+        {
+            'name': 'auth',
+            'url': '/login',
+            'views': [
+                {
+                    'name': '',
+                    'template': '<div auth-awesome-login></div>'
+                }
+            ]
+        },
+        {
+            'name': 'register',
+            'url': '/register',
+            'views': [
+                {
+                    'name': '',
+                    'template': '<div auth-awesome-register></div>'
+                }
+            ]
+        },
+        {
+            'name': 'reset',
+            'url': '/reset',
+            'views': [
+                {
+                    'name': '',
+                    'template': '<div auth-awesome-reset></div>'
+                }
+            ]
+        }
+    ];
+
+    var moduleRun = function ($rootScope, $urlRouter, AuthAwesome) {
+        var $state = $rootScope.$state;
+
+        angular.forEach(defaultAuthState, function (value, key) {
+
+            var getExistingState = $state.get(value.name)
+
+            if (getExistingState !== null) {
+                return;
+            }
+
+            var state = {
+                'url': value.url,
+                'parent': value.parent,
+                'abstract': value.abstract,
+                'views': {}
+            };
+
+            angular.forEach(value.views, function (view) {
+                state.views[view.name] = {
+                    templateUrl: view.templateUrl,
+                };
+            });
+
+            AuthAwesome.homePageState.state(value.name, state);
+        });
+        // Configures $urlRouter's listener *after* your custom listener
+
+        $urlRouter.sync();
+        $urlRouter.listen();
+    };
 
     var loginDirective = function (){
         return {
