@@ -43,7 +43,7 @@
   "trailing": true,       // Prohibit trailing whitespaces.
   "quotmark": "single",   // Enforce use of single quotation marks for strings.
   "unused": false,         // Warn when variables are defined but never used.
-  "maxlen": 220,          // Enforce line length to 100 characters
+  //"maxlen": 220,          // Enforce line length to 100 characters
   "camelcase": false,      // Force all variable names to use either camelCase style or UPPER_CASE with underscores.
   "jasmine": true,
 

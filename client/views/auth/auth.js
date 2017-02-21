@@ -31,12 +31,7 @@ angular.module('ng-gulp-hapi')
         url: '/login',
         views: {
           '': {
-            templateUrl: 'views/auth/login.html',
-            controller: 'LoginCtrl',
-            controllerAs: 'auth',
-            resolve: {
-              // skipIfLoggedIn: skipIfLoggedIn
-            }
+            template: '<div auth-awesome-login></div>'
           }
         }
       })
@@ -44,12 +39,7 @@ angular.module('ng-gulp-hapi')
         url: '/register',
         views: {
           '': {
-            templateUrl: 'views/auth/register.html',
-            controller: 'RegisterCtrl',
-            controllerAs: 'register',
-            resolve: {
-              // skipIfLoggedIn: skipIfLoggedIn
-            }
+            template: '<div auth-awesome-register></div>'
           }
         }
       })

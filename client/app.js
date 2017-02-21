@@ -15,7 +15,7 @@ angular.module('ng-gulp-hapi', [
   'ngPopup',
   'ngDock',
   'angular-jwt',
-  'satellizer'
+  'authAuwesome'
 ])
   .config(function ($urlRouterProvider, $httpProvider, $animateProvider, $authProvider, API_URL) {
     $urlRouterProvider.otherwise('/login');
@@ -115,6 +115,14 @@ angular.module('ng-gulp-hapi', [
     $rootScope.loading = true;
     $rootScope.mode = 'SLD';
     $rootScope.stateClass = $state.current.name;
+
+    $rootScope.$on('auth:user-register-success', function() {
+        alert('Register success! Please check you email and verify before login!');
+    });
+
+    $rootScope.$on('auth:user-register-success', function() {
+        alert(response.data.message);
+    });
 
     gettextCatalog.setCurrentLanguage('en-us');
 

@@ -40,7 +40,7 @@ exports.send = function (email) {
 	};
 
 	transporter.sendMail(mailOptions, function (err, info) {
-		if (err) return res.status(500, err);
+		if (err) return err.status(500, err);
 
 		console.log('email sent ', info.response);
 	})
