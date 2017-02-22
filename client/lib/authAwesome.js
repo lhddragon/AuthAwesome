@@ -24,11 +24,13 @@
             this.tokenRoot = null;
             this.withCredentials = false;
             //////////////////////////////////////
+            this.existingStateProvider = null;
             this.homePageState = 'main';
             this.customerAuthentication = false;
             this.routingType = 'ui-router'; // ui-router / ng-route ... 
             this.loginState = 'login';
             this.loginStateUrl = '/login';
+            this.logoutRedirectUrl = '/login';
             this.loginTemplate = 'login.html';
             this.registerState = 'register';
             this.registerStateUrl = '/register';
@@ -181,7 +183,7 @@
                      
     var defaultAuthState = [
         {
-            'name': 'auth',
+            'name': 'authAwesomeLoginState',
             'url': '/login',
             'views': [
                 {
@@ -191,7 +193,7 @@
             ]
         },
         {
-            'name': 'register',
+            'name': 'authAwesomeRegisterState',
             'url': '/register',
             'views': [
                 {
@@ -201,7 +203,7 @@
             ]
         },
         {
-            'name': 'reset',
+            'name': 'authAwesomeResetState',
             'url': '/reset',
             'views': [
                 {
@@ -212,31 +214,58 @@
         }
     ];
 
-    var moduleRun = function ($rootScope, $urlRouter, AuthAwesome) {
-        var $state = $rootScope.$state;
+    function checkStateExist(state, compareState) {
+        var isExist = false;
+        var allExistingStates = state.get();
+        var compareStateName = compareState.name;
+        var compareStateUrl = compareState.url;
+        for (var i = 0; i < allExistingStates.length; i++) {
+            var thisState = allExistingStates[i];
+            if (thisState.name) {
+                if (thisState.name === compareStateName) {
+                    return true;
+                }
+            }
+            if (thisState.url) {
+                if (thisState.url === compareStateUrl) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+
+    var moduleRun = function ($rootScope, $urlRouter, AuthAwesome, $state) {
+        // var $state = $rootScope.$state;
 
         angular.forEach(defaultAuthState, function (value, key) {
 
-            var getExistingState = $state.get(value.name)
-
-            if (getExistingState !== null) {
+            // Check of state is already exist
+            
+            // angular.forEach(allExistingStates, function (state) {
+            //     state.views[view.name] = {
+            //         template: view.template,
+            //     };
+            // });
+            // debugger
+            if (checkStateExist($state, value)) {
                 return;
             }
 
             var state = {
+                'name': value.name,
                 'url': value.url,
-                'parent': value.parent,
-                'abstract': value.abstract,
                 'views': {}
             };
 
             angular.forEach(value.views, function (view) {
                 state.views[view.name] = {
-                    templateUrl: view.templateUrl,
+                    template: view.template,
                 };
             });
 
-            AuthAwesome.homePageState.state(value.name, state);
+            AuthAwesome.existingStateProvider.state(value.name, state);
         });
         // Configures $urlRouter's listener *after* your custom listener
 
@@ -254,7 +283,7 @@
                 $scope.password = '1234';
 
                 function handleError(err) {
-                    console.log(err.data.message);
+                    console.log(err);
                 }
 
                 function handleSuccess(res) {
@@ -304,6 +333,12 @@
         function AuthProvider(AuthAwesome) {
             this.AuthAwesome = AuthAwesome;
         }
+        Object.defineProperty(AuthProvider.prototype, "existingStateProvider", {
+            get: function () { return this.AuthAwesome.existingStateProvider; },
+            set: function (value) { this.AuthAwesome.existingStateProvider = value; },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(AuthProvider.prototype, "baseUrl", {
             get: function () { return this.AuthAwesome.baseUrl; },
             set: function (value) { this.AuthAwesome.baseUrl = value; },
@@ -383,6 +418,12 @@
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(AuthProvider.prototype, "logoutRedirectUrl", {
+            get: function () { return this.AuthAwesome.logoutRedirectUrl; },
+            set: function (value) { this.AuthAwesome.logoutRedirectUrl = value; },
+            enumerable: true,
+            configurable: true
+        });
         AuthProvider.prototype.facebook = function (options) {
             angular.extend(this.AuthAwesome.providers.facebook, options);
         };
@@ -439,7 +480,8 @@
                 getToken: function () { return AuthAwesomeShared.getToken(); },
                 setToken: function (token) { return AuthAwesomeShared.setToken({ access_token: token }); },
                 removeToken: function () { return AuthAwesomeShared.removeToken(); },
-                setStorageType: function (type) { return AuthAwesomeShared.setStorageType(type); }
+                setStorageType: function (type) { return AuthAwesomeShared.setStorageType(type); },
+                getLogoutRedirectUrl: function () { return AuthAwesomeShared.getLogoutRedirectUrl(); }
             };
         };
         AuthProvider.$inject = ['AuthAwesome'];
@@ -604,6 +646,9 @@
         };
         Shared.prototype.setStorageType = function (type) {
             this.AuthAwesome.storageType = type;
+        };
+        Shared.prototype.getLogoutRedirectUrl = function () {
+            return this.AuthAwesome.logoutRedirectUrl;
         };
         Shared.$inject = ['$q', '$window', 'AuthAwesome', 'AuthAwesomeStorage'];
         return Shared;
@@ -1074,7 +1119,7 @@
         return HttpProviderConfig;
     }());
 
-    angular.module('authAuwesome', [])
+    angular.module('authAuwesome', ['ui.router'])
         .provider('$auth', ['AuthAwesome', function (AuthAwesome) { return new AuthProvider(AuthAwesome); }])
         .constant('AuthAwesome', Config.getConstant)
         .service('AuthAwesomeShared', Shared)
@@ -1087,7 +1132,8 @@
         .service('AuthAwesomeInterceptor', Interceptor)
         .directive('authAwesomeLogin', loginDirective)
         .directive('authAwesomeRegister', registerDirective)
-        .config(['$httpProvider', function ($httpProvider) { return new HttpProviderConfig($httpProvider); }]);
+        .config(['$httpProvider', function ($httpProvider) { return new HttpProviderConfig($httpProvider); }])
+        .run(moduleRun);
     var ng1 = 'authAwesome';
 
     return ng1;

@@ -17,7 +17,7 @@ angular.module('ng-gulp-hapi', [
   'angular-jwt',
   'authAuwesome'
 ])
-  .config(function ($urlRouterProvider, $httpProvider, $animateProvider, $authProvider, API_URL) {
+  .config(function ($urlRouterProvider, $httpProvider, $animateProvider, $authProvider, API_URL, $stateProvider) {
     $urlRouterProvider.otherwise('/login');
 
     $httpProvider.interceptors.push('httpInterceptor');
@@ -39,6 +39,8 @@ angular.module('ng-gulp-hapi', [
       url: API_URL + 'auth/facebook'
     });
 
+    $authProvider.existingStateProvider = $stateProvider;
+    $authProvider.logoutRedirectUrl = '/login';
 
 
 
@@ -120,7 +122,7 @@ angular.module('ng-gulp-hapi', [
         alert('Register success! Please check you email and verify before login!');
     });
 
-    $rootScope.$on('auth:user-register-success', function() {
+    $rootScope.$on('auth:user-register-failed', function(response) {
         alert(response.data.message);
     });
 
