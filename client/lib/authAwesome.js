@@ -25,6 +25,7 @@
             this.withCredentials = false;
             //////////////////////////////////////
             this.existingStateProvider = null;
+            this.customAuthRouting = false;
             this.homePageState = 'main';
             this.customerAuthentication = false;
             this.routingType = 'ui-router'; // ui-router / ng-route ... 
@@ -238,7 +239,7 @@
 
     var moduleRun = function ($rootScope, $urlRouter, AuthAwesome, $state) {
         // var $state = $rootScope.$state;
-
+        if (AuthAwesome.customAuthRouting) { return; }
         angular.forEach(defaultAuthState, function (value, key) {
 
             // Check of state is already exist
@@ -336,6 +337,18 @@
         Object.defineProperty(AuthProvider.prototype, "existingStateProvider", {
             get: function () { return this.AuthAwesome.existingStateProvider; },
             set: function (value) { this.AuthAwesome.existingStateProvider = value; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AuthProvider.prototype, "customInterceptor", {
+            get: function () { return this.AuthAwesome.customInterceptor; },
+            set: function (value) { this.AuthAwesome.customInterceptor = value; },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(AuthProvider.prototype, "customAuthRouting", {
+            get: function () { return this.AuthAwesome.customAuthRouting; },
+            set: function (value) { this.AuthAwesome.customAuthRouting = value; },
             enumerable: true,
             configurable: true
         });
@@ -1130,6 +1143,7 @@
         .service('AuthAwesomeOAuth1', OAuth1)
         .service('AuthAwesomeStorage', Storage)
         .service('AuthAwesomeInterceptor', Interceptor)
+        // .service('AuthAwesomeHttpInterceptor', authAwesomeHttpInterceptor)
         .directive('authAwesomeLogin', loginDirective)
         .directive('authAwesomeRegister', registerDirective)
         .config(['$httpProvider', function ($httpProvider) { return new HttpProviderConfig($httpProvider); }])

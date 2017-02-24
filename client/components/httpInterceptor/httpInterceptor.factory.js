@@ -2,21 +2,21 @@
 
 angular.module('ng-gulp-hapi')
   .factory('httpInterceptor', ['$injector', function ($injector) {
-    return {
+    // return {
 
-      request: function(config) {
-            var $auth = $injector.get('$auth');
-            var token = $auth.getToken();
+    //   request: function(config) {
+    //         var $auth = $injector.get('$auth');
+    //         var token = $auth.getToken();
 
-            if (token) {
-                config.headers.Authorization = 'Bearer ' + token;
-            }
+    //         if (token) {
+    //             config.headers.Authorization = 'Bearer ' + token;
+    //         }
                
-            return config;
-        },
-        response: function(response) {
-            return response;
-        }
-    };
+    //         return config;
+    //     },
+    //     response: function(response) {
+    //         return response;
+    //     }
+    // };
 
   }]);

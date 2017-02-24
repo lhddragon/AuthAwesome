@@ -20,11 +20,18 @@ angular.module('ng-gulp-hapi', [
   .config(function ($urlRouterProvider, $httpProvider, $animateProvider, $authProvider, API_URL, $stateProvider) {
     $urlRouterProvider.otherwise('/login');
 
-    $httpProvider.interceptors.push('httpInterceptor');
+    // $httpProvider.interceptors.push('httpInterceptor');
 
     $httpProvider.defaults.headers.post  = {'Content-Type': 'application/json; charset=utf-8'};
 
     $animateProvider.classNameFilter(/anim-/);
+
+
+
+
+    $authProvider.customAuthRouting = false; // If true, means you need to implement your own routing.
+    // $authProvider.customInterceptor = true; // If true, means you need to implement your own interceptor.
+
 
     $authProvider.loginUrl = API_URL + 'auth/login';
     $authProvider.signupUrl = API_URL + 'auth/register';
