@@ -285,10 +285,16 @@
 
                 function handleError(err) {
                     console.log(err);
+                    $rootScope.$broadcast('auth:user-login-failed', err);
                 }
 
                 function handleSuccess(res) {
                     console.log(res);
+                    if (res.status === 401 || !res.data.token) {
+                        handleError(res.data);
+                        return;
+                    }
+                    $rootScope.$broadcast('auth:user-login-success', res);
                     $auth.setToken(res.data.token);
                     $state.go(AuthAwesome.homePageState);
                 }
