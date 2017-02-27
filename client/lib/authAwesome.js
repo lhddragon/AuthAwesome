@@ -340,6 +340,12 @@
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(AuthProvider.prototype, "homePageState", {
+            get: function () { return this.AuthAwesome.homePageState; },
+            set: function (value) { this.AuthAwesome.homePageState = value; },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(AuthProvider.prototype, "customInterceptor", {
             get: function () { return this.AuthAwesome.customInterceptor; },
             set: function (value) { this.AuthAwesome.customInterceptor = value; },
