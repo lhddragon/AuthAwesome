@@ -4,18 +4,18 @@ The goal of this project is to build a authentication module and by just doing s
 
 ## Key features
 
-- [ ] configurable login page template
-- [ ] login/logout/register/3rd party login
-- [ ] JWT integrated
+- [x] configurable login page template
+- [x] login/logout/register/3rd party login
+- [x] JWT integrated
 
 ## Overall progress
 
 - [ ] Unit test
 - [ ] Regression test
-- [ ] Login form as directive
+- [x] Login form as directive
 - [ ] Login form validation
 - [ ] Load login page css seperately
 - [ ] PostgreSQL integration
 - [ ] 3rd party authentication
-- [ ] Store token information
+- [x] Store token information
 - [ ] Session control using ng-idle
